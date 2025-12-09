@@ -1,0 +1,9 @@
+Week 2 (about 14–8 days before deadline)
+
+This week I focused on stabilizing the baseline ResNet-18 training and then analyzing its detailed performance. I reran the baseline training for 25 epochs with the final hyperparameters (Adam optimizer, learning rate schedule, data augmentation) and saved the best model checkpoint. The best validation accuracy I obtained was approximately 0.8323, which is a solid baseline on CIFAR-10.
+
+Next, I wrote evaluation code to compute per-class precision, recall, F1, and support using scikit-learn. I ran the best baseline model over the full test set and collected all predictions and true labels. Then I computed the confusion matrix and per-class metrics and stored them in JSON for reproducibility.
+
+The per-class analysis showed that the model performs well on several classes like ship and automobile, with precision above 0.90. However, the cat class is clearly the worst, with precision 0.703, recall 0.666, and F1 0.684. I sorted the classes by precision and confirmed that cat is at the bottom. I also inspected the confusion matrix to see that cats are often confused with dogs and other animals. Based on this, I decided to target the cat class for the fine-tuning step required by Topic 8.
+
+I cleaned up the notebook structure into clear parts: Part 1 for data loading, Part 2 for baseline training, and Part 3 for per-class evaluation and confusion matrix. I added comments and headings so the TA can follow the baseline pipeline and see how I identified the hardest class.
