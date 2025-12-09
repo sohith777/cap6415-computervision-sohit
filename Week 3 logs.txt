@@ -1,0 +1,9 @@
+Week 3 (about 7–3 days before deadline)
+
+This week I implemented the main fine-tuning strategy and measured its effect on the cat class and on overall performance. I added a class-weighted cross-entropy loss where the weight for the cat class is set to 2.0 and all other classes keep weight 1.0. I reused the same ResNet-18 architecture and started fine-tuning from the best baseline checkpoint.
+
+I ran fine-tuning for 10 additional epochs with a smaller learning rate. During this step, I tracked train and validation accuracy and saved a separate fine-tuned checkpoint and JSON history. The best validation accuracy after fine-tuning was about 0.8340, which is slightly higher but very close to the baseline 0.8323, so overall accuracy stayed stable, which is what I wanted.
+
+Then I recomputed per-class metrics for the fine-tuned model using the same evaluation code. For the cat class, the metrics improved in all three dimensions: precision increased from 0.703 to 0.724, recall increased from 0.666 to 0.728, and F1 increased from 0.684 to 0.726. I generated bar plots comparing per-class precision for the baseline and fine-tuned models and highlighted the cat bar to show the improvement.
+
+I also implemented code to inspect individual cat images. I collected examples where the baseline model predicted incorrectly but the fine-tuned model predicted correctly, and also cases where fine-tuning made a previously correct prediction wrong. I displayed these images in grids to visually understand what kinds of cat images benefit from the class-weighted training and which ones are harmed.
