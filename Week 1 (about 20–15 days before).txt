@@ -1,0 +1,9 @@
+Week 1 (about 20–15 days before deadline)
+
+This week I finalized my project topic as CAP6415 Topic 8 on CIFAR-10 (fine-tuning a small model for challenging classes). I chose the Kaggle CIFAR-10 dataset (ayush1220/cifar10) and downloaded it as archive (9).zip. I set up the data loading code in the notebook so that it extracts the zip, builds train and test folders, and uses ImageFolder with proper transforms.
+
+I implemented the data transforms: random crop with padding, random horizontal flip, and normalization using the standard CIFAR-10 mean and standard deviation. I verified that the dataloader works by visualizing a small batch of images and labels and checking that the classes line up with CIFAR-10 (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck).
+
+I then implemented the baseline model using ResNet-18. I replaced the final fully connected layer to output 10 classes and moved the model to GPU in Colab. I wrote training and evaluation loops that track train loss, train accuracy, validation loss, and validation accuracy each epoch and save the best checkpoint and a JSON history file.
+
+I ran initial training runs for the baseline ResNet-18 for 25 epochs. I debugged a few dataloader warnings related to multiprocessing workers but confirmed they do not affect training. By the end of the week, the baseline model was training correctly and reaching around 80% validation accuracy, but I knew I still needed to tune it a bit more and compute detailed per-class metrics in the next week.
